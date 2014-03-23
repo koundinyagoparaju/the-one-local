@@ -1,0 +1,75 @@
+//pseudo code to parse a 2-d nxn matrix spirally starting from [0][0] element and moving towards right
+class Spiral
+{
+private int topCount;
+private int rightCount;
+private int leftCount;
+private int bottomCount;
+private int elementCount;
+
+public Spiral(int n)
+{
+  topCount=rightCount=leftCount=bottomCount=n-1;
+  elementCount=n*n;
+}
+
+private void turnRight(int row, int col)
+{
+ for(int l=col+1; l<=rightCount; l++)
+ {
+ //print the element at [row,l] location
+ elementCount--;
+ }
+ topCount--;
+ turnDown(row,rightCount);
+}
+private void turnDown(int row, int col)
+{
+if(elementCount==0)
+   return;
+for(int l=row+1; l<=bottomCount; l++)
+ {
+ //print the element at [l,col] location
+  elementCount--;
+ }
+ rightCount--;
+ turnLeft(bottomCount,col);
+}
+
+private void turnLeft(int row, int col)
+{
+if(elementCount==0)
+   return;
+for(int l=col-1; l>=leftCount; l--)
+ {
+ //print the element at [row,l] location
+  elementCount--;
+ }
+ bottomCount--;
+ turnTop(row,leftCount);
+}
+private void turnTop(int row, int col)
+{
+if(elementCount==0)
+   return;
+for(int l=row-1; l>=topCount; l--)
+ {
+ //print the element at [l,col] location
+  elementCount--;
+ }
+ leftCount--;
+ turnRight(topCount,col);
+ }
+public void Start()
+{
+turnRight(0,-1);
+}
+}
+
+public class SpiralMain{
+public static void main(string[] args)
+{
+Spiral spiral = new Spiral(10);
+spiral.Start();
+}
+}

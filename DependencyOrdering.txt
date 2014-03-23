@@ -1,0 +1,84 @@
+//This is the pseudo code to order in which a list of tasks needs to be performed given the list of tasks and dependencies of each task on other tasks. It can also detect circular dependency
+// get and set are c# shorthand for getter and setter methods. I used it here to decrease the lines of code. They cannot be used as such as Java doesn't have this shorthand
+class Activity
+{
+	public int ActivityId {get;set;}
+	public List<int> DependencyList{get;set;}
+	
+	public Activity(int activityId)
+	{
+	ActivityId=activityId;
+	DependencyList=GetAllDependencies();
+	}
+	private List<int> GetAllDependencies()
+	{
+	//Logic to get all dependencies of Actvity with Id this.activityId from Database and return a list of activity id.
+	// select dependentActivityId from ActivityDependency where ActivityId = this.ActivityId
+	}
+	public List<int> GetAllActivitiesdependentOnId()
+	{
+	//Logic to get the list of activities where this.activityId is an immediate dependent
+	//select ActivityId from ActivityDependency where dependentActivityId=this.ActivityId
+	}
+}
+public class MainClass
+{
+	public static void main(string[] args)
+	{
+	StartParsing();
+	}
+	private static void StartParsing()
+	{
+	    List<int> orderedActivitiesList=GetAllIndependentActivities();
+		List<int> visitedActivitiesList=GetAllIndependentActivities();
+		if(orderedActivitiesList==null)
+		{
+		System.out.Println("Cannot Start any Activity as there are no independent Actvities");
+		return;
+		}
+		for(int visitedActivityId : visitedActivitiesList)
+		{
+		//visitedActivitiesList.add(orderedActivityId);
+		Activity activity=new Activity(visitedActivityId);
+		if((List<int> dependentActivitiesofId = activity.GetAllDependencies()==null || orderedActivitiesList.containsAll(dependentActivitiesofId)) && !orderedActivitiesList.contains(visitedActivityId))
+		{
+		orderedActivitiesList.add(visitedActivityId);
+		if((List<int> activitiesDependentOnId = activity.GetAllActivitiesdependentOnId())!=null)
+			visitedActivitiesList.add(activitiesDependentOnId);
+		}
+		}
+		if(!orderedActivitiesList.containsAll(GetAllActivityIds()))
+		{
+		System.out.Println("There is a Cyclic Dependency in Activities");
+		}
+		else
+		{
+		System.out.Println("The order of Activities to be performed is "+orderedActivitiesList);
+		}
+		
+	}
+	private static List<int> GetAllIndependentActivities()
+	{
+	//Logic to get all activities whose Ids are not there in the activityid column in activityDependency table
+	//select Id from Activity where Id not in (select ActivityId from ActivityDependency);
+	}
+	private static List<int> GetAllActivityIds()
+	{
+	//Logic to get all id from the Activity Table
+	//select Id from Activity;
+	}
+}
+
+
+
+/*
+Table Structure
+
+Table Name: Activity
+PK: Id
+Columns: Id,Name
+
+Table Name: ActivityDependency
+PK: Id
+Columns: Id, ActivityId, dependentActivityId
+*/

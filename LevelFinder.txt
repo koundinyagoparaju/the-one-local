@@ -1,0 +1,32 @@
+//This is the method to print the level of the node in which a given value is found
+input: value and the root node of the tree (each node can have any no. of children and two methods are assumed getValue(node) and getChildren(node))
+int getLevel(Node root, int value)
+{
+int level=0;
+Node markerNode=null;
+ArrayList<Node> traversedNodeList = new ArrayList<Node>();
+traversedNodeList.add(root);
+ListIterartor iter = traversedNodeList.iterator();
+while(iter.hasNext())
+{
+Node tempNode=iter.next();
+if(tempNode=null)
+{
+level++;
+traversedNodeList.add(markerNode);
+continue;
+}
+if(getValue(tempNode)==value)
+{
+return level;
+}
+else
+{
+if((ArrayList<Node> children = getChildren(tempNode))!=null)
+{
+traversedNodeList.addAll(children);
+}
+}
+}
+return -1;
+}
