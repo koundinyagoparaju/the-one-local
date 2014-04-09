@@ -31,7 +31,7 @@ namespace AgiliqApp.Controllers
         {          
                 GetCodeModel gcm = new GetCodeModel();
                 gcm.client_id = "KZMA1XOCwrhxF70VDMFTJ25gg1QPsJPHNunZL7vsoHHKQAT1Gj";
-                gcm.client_secret = "Um0Pg8upfWaA4GQPWOJ1KvzT5jctbD3U1EpAY1Y0H8KFZBjS1Z";
+                gcm.client_secret = "<Client Secret Goes here>";
                 gcm.redirect_uri = "http://54.84.112.141/Home/GetAuthToken";
                 gcm.state = state;
                 gcm.code = code;
@@ -40,7 +40,6 @@ namespace AgiliqApp.Controllers
                 Dictionary<string, string> response = GetAsync(requestUri, requestParams);
                 gcm.access_token = response["access_token"];
                 return View("Apply", gcm);
-               // return View(gcm);
             
         }
         public ActionResult Apply(string access_token, string scope, string token_type)
@@ -68,15 +67,11 @@ namespace AgiliqApp.Controllers
 public Dictionary<string,string> GetAsync(string uri, string requestParams)
 {
     WebClient wc = new WebClient();
-   // wc.Headers[HttpRequestHeader.ContentType] = "multipart/form-data";
-    //wc.UploadString()
         string HtmlResult = wc.UploadString(uri,requestParams);
-    
-  // FileStream fs = new FileStream("c:\\inetpub\\wwwroot\\log.txt", FileMode.Create);
+
   
     try
     {
-        //fs.Write(System.Text.Encoding.UTF8.GetBytes(HtmlResult), 0, System.Text.Encoding.UTF8.GetByteCount(HtmlResult));
         return (Dictionary<string, string>)JsonConvert.DeserializeObject(HtmlResult, typeof(Dictionary<string, string>));
     }
     catch(Exception ee)
