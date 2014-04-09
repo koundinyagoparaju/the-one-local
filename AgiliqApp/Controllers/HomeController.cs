@@ -72,11 +72,11 @@ public Dictionary<string,string> GetAsync(string uri, string requestParams)
     //wc.UploadString()
         string HtmlResult = wc.UploadString(uri,requestParams);
     
-   FileStream fs = new FileStream("c:\\inetpub\\wwwroot\\log.txt", FileMode.Create);
+  // FileStream fs = new FileStream("c:\\inetpub\\wwwroot\\log.txt", FileMode.Create);
   
     try
     {
-        fs.Write(System.Text.Encoding.UTF8.GetBytes(HtmlResult), 0, System.Text.Encoding.UTF8.GetByteCount(HtmlResult));
+        //fs.Write(System.Text.Encoding.UTF8.GetBytes(HtmlResult), 0, System.Text.Encoding.UTF8.GetByteCount(HtmlResult));
         return (Dictionary<string, string>)JsonConvert.DeserializeObject(HtmlResult, typeof(Dictionary<string, string>));
     }
     catch(Exception ee)
