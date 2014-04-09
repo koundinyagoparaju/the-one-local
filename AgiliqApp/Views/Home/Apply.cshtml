@@ -1,0 +1,21 @@
+﻿@model AgiliqApp.Models.GetCodeModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Apply
+    </title>
+</head>
+<body>
+    <form action="http://join.agiliq.com/api/resume/upload" method="post" enctype="multipart/form-data">
+        <input type="hidden" id="access_token" name="access_token" value="@Model.access_token">
+        Enter First Name: <input type="text" id="first_name" name="first_name">
+        Enter Last Name: <input type="text" id="last_name" name="last_name">
+        Enter Projects URL: <input type="url" id="projects_url" name="projects_url">
+        Enter Code URL: <input type="url" id="code_url" name="code_url">
+        Upload Resume:  <input type="file" id="content" name="content">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+

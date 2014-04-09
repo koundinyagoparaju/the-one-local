@@ -1,0 +1,21 @@
+﻿@model AgiliqApp.Models.GetCodeModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Get Auth Code
+    </title>
+</head>
+<body>
+    <form action="http://join.agiliq.com/oauth/authorize" method="get">
+        <input type="hidden" name="client_id" id="client_id" value="@Model.client_id" />
+        <input type="hidden" name="client_secret" id="client_secret" value="@Model.client_secret" />
+        <input type="hidden" name="code" id="code" value="@Model.code" />
+        <input type="hidden" name="state" id="state" value="@Model.state" />
+        <input type="hidden" name="redirect_uri" id="redirect_uri" value="@Model.redirect_uri" />
+        <button type="submit">Start</button>
+
+    </form>
+</body>
+
+</html>

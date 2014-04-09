@@ -1,0 +1,38 @@
+﻿@model AgiliqApp.Models.GetCodeModel
+<html>
+<head>
+    <title>
+        Get Auth Code
+    </title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        </head>
+        <body>
+            <form action="http://join.agiliq.com/oauth/access_token/" method="post">
+                <input type="hidden" name="client_id" id="client_id" value="@Model.client_id" />
+                <input type="hidden" name="client_secret" id="client_secret" value="@Model.client_secret" />
+                <input type="hidden" name="code" id="code" value="@Model.code" />
+                <input type="hidden" name="state" id="state" value="@Model.state" />
+                <input type="hidden" name="redirect_uri" id="redirect_uri" value="@Model.redirect_uri" />
+                <button type="submit">Authorize</button>
+
+            </form>
+                @*<script type="text/javascript">
+                    $(document).ready(function () {
+                        $("#auth_button").click(function () {
+                            debugger;
+                            var d1 = $("#auth_form").serialize();
+                            debugger;
+                            $.post("http://join.agiliq.com/oauth/access_token", d1, function (result) {
+
+                                debugger;
+                                $.post("/home/GetAuthToken", { access_token: result["access_token"], token_type: resul["token_type"] }, function () { });
+                            }
+                                );
+
+                        });
+                    });
+
+    </script>*@
+    
+    </body>
+</html>
